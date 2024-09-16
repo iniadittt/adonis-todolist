@@ -1,0 +1,17 @@
+@layout.app({ title: 'Detail Todolist' })
+  @slot('meta')
+    <meta name="description" content="A welcome page made with EdgeJS" />
+    <style>
+      body {
+        background-color: #f8fafc;
+      }
+    </style>
+  @endslot
+  
+  @!component('components/ui/nav')
+
+  <main class="w-full bg-slate-50 flex justify-center">
+    @!component('components/ui/sidebar', { todo: todo || null })
+    @!component('components/ui/section', { todoCompleated, todoNotCompleated })
+  </main>
+@end

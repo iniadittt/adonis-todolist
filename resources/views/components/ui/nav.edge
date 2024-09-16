@@ -1,0 +1,13 @@
+<nav class="w-full p-4 bg-slate-800 flex justify-between fixed">
+  @if (auth.user)
+    <div class="text-slate-100 font-semibold mr-4">
+      {{ auth.user.fullName }}
+    </div>
+    <form action="/logout?_method=DELETE" method="post">
+      {{ csrfField() }}
+      <button type="submit" class="text-sm text-slate-100 font-semibold hover:underline cursor-pointer">
+        Logout
+        </button>
+    </form>
+  @endif
+</nav>

@@ -1,0 +1,81 @@
+@layout.app({ title: 'Register - AdonisJS Todolist' })
+  @slot('meta')
+    <meta name="description" content="A welcome page made with EdgeJS" />
+  @endslot
+  
+  <main class="w-full h-screen bg-slate-100 flex flex-col justify-center items-center">
+    <div class="w-5/6 md:w-1/3 xl:w-1/6 p-6 bg-white rounded-md shadow-sm">
+      @flashMessage('notification')
+        @if($message && $message.type === 'error')
+          <div
+            class="mb-4 bg-red-100 border border-red-200 text-sm text-red-800 rounded-lg px-4 py-4"
+            role="alert"
+          >
+            {{ $message.message }}
+          </div>
+        @endif
+      @endflashMessage
+      <h1 class="font-bold text-slate-700 text-2xl">
+        Register
+      </h1>
+      <form action="{{ route('auth.register.store') }}" method="post" class="mt-4 flex flex-col gap-4">
+        {{ csrfField() }}
+        <div class="flex flex-col gap-2">
+          <label for="fullName" class="text-sm">Nama Lengkap</label>
+          <input
+            type="text"
+            name="fullName"
+            id="fullName"
+            placeholder="Budi"
+            class="bg-transparent bg-slate-100 border border-slate-200 rounded-sm text-sm p-2"
+            value="{{ old('fullName') || '' }}"
+            required
+          />
+          @inputError('fullName')
+            <p class="text-xs text-red-600 mt-2">
+              {{ $messages }}
+            </p>
+          @end
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="email" class="text-sm">Alamat email</label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            placeholder="example@gmail.com"
+            class="bg-transparent bg-slate-100 border border-slate-200 rounded-sm text-sm p-2"
+            value="{{ old('email') || '' }}"
+            required
+          />
+          @inputError('email')
+            <p class="text-xs text-red-600 mt-2">
+              {{ $messages }}
+            </p>
+          @end
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="password" class="text-sm">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="••••••••"
+            class="bg-transparent bg-slate-100 border border-slate-200 rounded-sm text-sm p-2"
+            value="{{ old('password') || '' }}"
+            required
+          />
+          @inputError('password')
+            <p class="text-xs text-red-600 mt-2">
+              {{ $messages }}
+            </p>
+          @end
+        </div>
+        <button type="submit" class="p-2 rounded-sm bg-slate-700 text-slate-100 text-sm font-semibold">Daftar</button>
+      </form>
+    </div>
+    <p class="mt-4 text-sm">
+      Sudah punya akun? <a href="{{ route('auth.login.show') }}" class="text-sky-600 hover:underline">Login</a>
+    </p>
+  </main>
+@end

@@ -1,0 +1,17 @@
+@layout.app({ title: 'HOME PAGE' })
+  @slot('meta')
+    <meta name="description" content="A welcome page made with EdgeJS" />
+  @endslot
+  
+  <main class="bg-slate-100 w-full h-screen flex flex-col justify-center items-center gap-4">
+    <h1 class="text-slate-800 font-bold text-5xl">
+      TODOLIST WITH ADONISJS
+    </h1>
+    <p class="text-slate-700 font-light text-2xl">
+      Author : Aditya Bayu
+    </p>
+    <button class="px-4 py-2 bg-slate-700 text-slate-200 rounded-md">
+      <a href="{{ route('todo.show') }}" class="font-semibold">TODOLIST</a>
+    </button>
+  </main>
+@end

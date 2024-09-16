@@ -1,0 +1,86 @@
+<section class="w-2/3 h-screen overflow-y-auto pt-24 p-12">
+  <div>
+    <h1 class="font-bold text-3xl mb-4">
+      Not Compleated
+    </h1>
+    <div class="flex flex-col gap-4">
+      @if(todoNotCompleated.length > 0)
+        @each(todo in todoNotCompleated)
+          <div class="w-full bg-white shadow-sm rounded-md px-4 py-2 flex justify-between items-center">
+            <div>
+              <h1 class="font-semibold text-lg capitalize">
+                {{ todo.title }}
+              </h1>
+              <p class="text-sm capitalize">
+                {{ todo.description }}
+              </p>
+            </div>
+            <div class="flex gap-4">
+              <a href="{{ route('todo.detail', { id: todo.id }) }}" class="h-full hover:cursor-pointer">
+                📄
+          </a>
+              <form action="/todo/{{ todo.id }}/status?_method=PATCH&status=1" method="post">
+                {{ csrfField() }}
+            <button class="h-full hover:cursor-pointer">
+                  ✔️
+            </button>
+              </form>
+              <form action="/todo/{{ todo.id }}?_method=DELETE" method="post">
+                {{ csrfField() }}
+            <button class="h-full hover:cursor-pointer">
+                  🗑️
+            </button>
+              </form>
+            </div>
+          </div>
+        @end
+      @else
+        <p class="text-lg italic font-semibold text-slate-300 capitalize">
+          tidak ada tugas yang belum selesai
+        </p>
+      @end
+    </div>
+  </div>
+  <div class="mt-12">
+    <h1 class="font-bold text-3xl mb-4">
+      Compleated
+    </h1>
+    <div class="flex flex-col gap-4">
+      @if(todoCompleated.length > 0)
+        @each(todo in todoCompleated)
+          <div class="w-full bg-white shadow-sm rounded-md px-4 py-2 flex justify-between items-center">
+            <div>
+              <h1 class="font-semibold text-lg capitalize">
+                {{ todo.title }}
+              </h1>
+              <p class="text-sm capitalize">
+                {{ todo.description }}
+              </p>
+            </div>
+            <div class="flex gap-4">
+              <a href="{{ route('todo.detail', { id: todo.id }) }}" class="h-full hover:cursor-pointer">
+                📄
+            </a>
+              <form action="/todo/{{ todo.id }}/status?_method=PATCH&status=0" method="post">
+                {{ csrfField() }}
+              <button class="h-full hover:cursor-pointer">
+                  ❌
+              </button>
+              </form>
+              <form action="/todo/{{ todo.id }}?_method=DELETE" method="post">
+                {{ csrfField() }}
+              <button class="h-full hover:cursor-pointer">
+                  🗑️
+              </button>
+              </form>
+            </div>
+          </div>
+        @end
+      @else
+        <p class="text-lg italic font-semibold text-slate-300 capitalize">
+          tidak ada tugas yang selesai
+        </p>
+      @end
+    </div>
+  </div>
+</section>

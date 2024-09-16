@@ -1,0 +1,45 @@
+<aside class="w-1/3 h-screen border-r border-slate-200 pt-24 p-12">
+  <h1 class="font-bold text-2xl text-center">
+    {{ todo ? 'Update Todo' : 'Tambah Todo' }}
+  </h1>
+  <form
+    action="{{ todo ? '/todo/' + todo.id + '?_method=PATCH' : route('todo.store') }}"
+    method="post"
+    class="mt-8 flex flex-col gap-4"
+  >
+    {{ csrfField() }}
+    <div class="flex flex-col gap-2">
+      <label for="title" class="text-md font-medium">Judul Tugas</label>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        placeholder="Title"
+        class="bg-transparent bg-white border border-slate-200 rounded-sm text-sm p-2"
+        value="{{ old('title') || (todo ? todo.title : '') }}"
+        required
+      />
+      @inputError('title')
+        <p class="text-xs text-red-600 mt-2">
+          {{ $messages }}
+        </p>
+      @end
+    </div>
+    <div class="flex flex-col gap-2">
+      <label for="description" class="text-md font-medium">Deskripsi Tugas</label>
+      <textarea
+        name="description"
+        id="description"
+        placeholder="Description"
+        class="bg-transparent bg-white border border-slate-200 rounded-sm text-sm p-2 min-h-[120px]"
+        required
+      >{{ old('description') || (todo ? todo.description : '') }}</textarea>
+      @inputError('description')
+        <p class="text-xs text-red-600 mt-2">
+          {{ $messages }}
+        </p>
+      @end
+    </div>
+    <button type="submit" class="p-2 rounded-sm bg-slate-700 text-slate-100 text-sm font-semibold">{{ todo ? 'Update' : 'Tambah' }}</button>
+  </form>
+</aside>
